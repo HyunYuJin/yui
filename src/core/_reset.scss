@@ -1,0 +1,29 @@
+/*
+  Global yujin-ui Reset
+*/
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header,
+nav,
+section,
+article,
+aside,
+footer {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  background: none;
+}
