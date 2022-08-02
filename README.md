@@ -1,3 +1,3 @@
 # yui
 
-yujin-ui의 줄임말인 yui는 Glassmorphism 스타일의 UI입니다.
+Web Component API를 적용한 YUJIN-UI Library 입니다.
