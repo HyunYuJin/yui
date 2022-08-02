@@ -46,8 +46,7 @@ class Button extends HTMLElement {
   }
 
   private initStyles (): void {
-    // 중복되는 스타일은 어떤 기준으로 제거해줄까.. 뭘 우선순위로 적용해주어야할까...
-    // primary secondary 이런식이면 가장 마지막에 쓴 스타일로 적용
+    // 중복되는 스타일 제거 기준 - 가장 마지막에 쓴 클래스로 적용
     const colors = ['primary', 'secondary', 'success', 'warning', 'danger']
     const outlines = ['primary-outline', 'secondary-outline', 'success-outline', 'warning-outline', 'danger-outline']
   }
