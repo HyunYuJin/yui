@@ -5,20 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>yujin-ui demo</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       #yujinUI {
         width: 100%;
         height: 100vh;
-        background: linear-gradient(to bottom, #ff4f8b, #dff1ff);
       }
     </style>
   </head>
   <body>
     <div id="yujinUI">
-      <yui-button data-text="Primary" class="primary primary-outline"></yui-button>
-      <yui-button data-text="Secondary" class="secondary secondary-outline"></yui-button>
-      <yui-button data-text="Success" class="success success-outline"></yui-button>
-      <yui-button data-text="Warning" class="warning warning-outline"></yui-button>
-      <yui-button data-text="Danger" class="danger danger-outline"></yui-button>
+      <yui-button data-text="YUI Button" class=""></yui-button>
+      <yui-button data-text="Primary" class="primary"></yui-button>
+      <yui-button data-text="Primary" class="primary-outline"></yui-button>
+      <yui-button data-text="hover" class="hover"></yui-button>
+      <yui-button data-text="hover" class="hover hover-outline"></yui-button>
+      <yui-button data-text="processing" class="processing"></yui-button>
+      <yui-button data-text="processing" class="processing-outline"></yui-button>
     </div>
 
     <script type="module" src="/src/main.ts"></script>

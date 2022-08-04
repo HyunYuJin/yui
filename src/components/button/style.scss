@@ -1,11 +1,100 @@
-.primary {
-  color: red;
-  &-outline {
-   border: 5px solid red;
-  }
+$main-background: #fff !default;
+$main-default: #41403e !default;
+$btn-border-radius: 0.375rem;
+$padding-x: 0.75rem !default;
+$padding-y: 0.375rem !default;
+$primary: #f03758 !default;
+$primary-light: #fde1e6 !default;
+$primary-text: #fff !default;
+$primary-outline-text: #ed3052 !default;
+$hover: #d22344 !default;
+$hover-text: #fff !default;
+$hover-outline-text: #e293a0 !default;
+$hover-light: #ffe0e6 !default;
+$processing: #9996A2 !default;
+$processing-text: #fff !default;
+$processing-outline-text: #c7c7c7 !default;
+$processing-light: #f8f8f8 !default;
 
+.yui-button {
+  background-color: inherit;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $main-default;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+
+  display: inline-block;
+  padding: $padding-y $padding-x;
+  border-radius: $btn-border-radius;
+  transition: all 235ms ease-in-out 0s;
 }
 
-.secondary {
+.primary {
+  background-color: $primary;
+  color: $primary-text;
+  border-width: 0px;
+  border-color: unset;
+  
+  &-outline {
+    background-color: $primary-light;
+    color: $primary-outline-text;
+    border-width: 1px;
+    border-color: $primary-outline-text;
 
+    &:active {
+      background-color: $primary-light;
+    }
+  }
+
+  &:active {
+    
+  }
+}
+
+.hover {
+  background-color: $hover;
+  color: $hover-text;
+  border-width: 0px;
+  border-color: unset;
+
+  &-outline {
+    background-color: $hover-light;
+    color: $hover-outline-text;
+    border-width: 1px;
+    border-color: $hover-outline-text;
+
+    &:active {
+      background-color: $hover-light;
+    }
+  }
+
+  &:active {
+    
+  }
+}
+
+.processing {
+  background-color: $processing;
+  color: $processing-text;
+  border-width: 0px;
+  border-color: unset;
+
+  &-outline {
+    background-color: $processing-light;
+    color: $processing-outline-text;
+    border-width: 1px;
+    border-color: $processing-outline-text;
+
+    &:active {
+      background-color: $processing-light;
+    }
+  }
+
+  &:active {
+    
+  }
 }
