@@ -14,7 +14,7 @@ class Button extends HTMLElement {
 
   private init (): void {
     this.initNodes()
-    this.initClasses()
+    this.initClass()
     this.initEvents()
   }
 
@@ -22,6 +22,7 @@ class Button extends HTMLElement {
     this.addEventListener('click', (event) => {
       console.log(event)
     })
+    this.addEventListener('mousemove', this.initStyles)
   }
 
   private initNodes (): HTMLElement {
@@ -30,25 +31,29 @@ class Button extends HTMLElement {
     button.setAttribute('class', 'yui-button')
 
     const text = this.getAttribute('data-text') as string
-    button.innerText = text
+    const span = document.createElement('span')
+    span.innerText = text
+    button.appendChild(span)
 
     this.shadow.appendChild(button)
 
     return button
   }
 
-  private initClasses (): void {
-    const classes = [...this.getAttribute('class')?.split(' ') || []] 
+  private initClass (): void {
+    const properties = [...this.getAttribute('class')?.split(' ') || []]
 
-    classes.forEach(classs => {
-      this.shadow.querySelector('button')?.classList.add(classs)
+    properties.filter(property => property.length > 0).forEach(property => {
+      this.shadow.querySelector('.yui-button')?.classList.add(property)
     })
   }
 
-  private initStyles (): void {
-    // 중복되는 스타일 제거 기준 - 가장 마지막에 쓴 클래스로 적용
-    const colors = ['primary', 'secondary', 'success', 'warning', 'danger']
-    const outlines = ['primary-outline', 'secondary-outline', 'success-outline', 'warning-outline', 'danger-outline']
+  private initStyles (event: MouseEvent): void {
+    const x = event.pageX - this.offsetLeft
+    const y = event.pageY - this.offsetTop
+
+    this.style.setProperty('--x', x + 'px') 
+    this.style.setProperty('--y', y + 'px')
   }
 }
 
