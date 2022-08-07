@@ -2,17 +2,23 @@ interface Nodes {
   [key: string]: HTMLElement | null
 }
 
+interface Events {
+  [key: string]: CustomEvent
+}
+
 class Button extends HTMLElement {
   public shadowRoot: ShadowRoot
   public nodes: Nodes
+  public events: Events
   constructor () {
     super()
 
     this.shadowRoot = this.attachShadow({ mode: 'open' })
     this.nodes = {}
+    this.events = {}
 
     this.render()
-    this.initNodes()
+    this.init()
   }
 
   // 감시할 Attributes 등록
@@ -20,19 +26,33 @@ class Button extends HTMLElement {
     return ['data-text']
   }
 
+  private init (): void {
+    this.initNodes()
+    this.initEvents()
+  }
+
   private initNodes (): void {
     this.nodes.button = this.shadowRoot.querySelector('button')
     this.nodes.span = this.shadowRoot.querySelector('span')
   }
 
+  private initEvents (): void {
+    this.events.click = new CustomEvent('click', {
+      bubbles: true,
+      detail: { 
+        text: this.getAttribute('data-text')
+      }
+    })
+  }
+
   private connectedCallback (): void {
     this.nodes.button?.addEventListener('click', this.handleClick.bind(this))
-    this.nodes.button?.addEventListener('mousemove', this.getStyles.bind(this))
+    this.nodes.button?.addEventListener('mousemove', this.getEffects.bind(this))
   }
 
   private disconnectedCallback (): void {
     this.nodes.button?.removeEventListener('click', this.handleClick)
-    this.nodes.button?.removeEventListener('mousemove', this.getStyles)
+    this.nodes.button?.removeEventListener('mousemove', this.getEffects)
   }
 
   private adoptedCallback (): void {
@@ -48,14 +68,8 @@ class Button extends HTMLElement {
   private handleClick (): void {
     const random = Math.floor(Math.random() * (50 - 200 + 1) + 200)
     this.setAttribute('data-text', String(random))
-  }
 
-  private getStyles (event: MouseEvent): void {
-    const x = event.pageX - this.offsetLeft
-    const y = event.pageY - this.offsetTop
-
-    this.style.setProperty('--x', x + 'px') 
-    this.style.setProperty('--y', y + 'px')
+    this.dispatchEvent(this.events.click)
   }
 
   private render (): void {
@@ -73,6 +87,14 @@ class Button extends HTMLElement {
     const text = this.getAttribute('data-text') as string
 
     return text
+  }
+
+  private getEffects (event: MouseEvent): void {
+    const x = event.pageX - this.offsetLeft
+    const y = event.pageY - this.offsetTop
+
+    this.style.setProperty('--x', x + 'px') 
+    this.style.setProperty('--y', y + 'px')
   }
   
   private getStyle (): string {

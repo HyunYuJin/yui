@@ -19,7 +19,7 @@
   <body>
     <div id="yujinUI">
       <yui-button data-text="YUI Button" class="">dfsd</yui-button>
-      <yui-button data-text="Primary" class="primary"></yui-button>
+      <yui-button data-text="Primary" class="primary" onclick="eventClick(event.detail)"></yui-button>
       <yui-button data-text="Primary" class="primary-outline"></yui-button>
       <yui-button data-text="hover" class="hover"></yui-button>
       <yui-button data-text="hover" class="hover hover-outline"></yui-button>
@@ -28,5 +28,10 @@
     </div>
 
     <script type="module" src="/src/main.ts"></script>
+    <script>
+      function eventClick (e) {
+        console.log('button event cliecked = ' + JSON.stringify(e))
+      }
+  </script>
   </body>
 </html>
