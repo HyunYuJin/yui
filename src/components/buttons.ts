@@ -5,13 +5,10 @@ class Button extends HTMLElement {
 
     this.shadowRoot = this.attachShadow({ mode: 'open' })
 
-    // this.init()
     this.render()
   }
 
   private init (): void {
-    this.initNodes()
-    this.initClass()
     this.initEvents()
   }
 
@@ -20,29 +17,6 @@ class Button extends HTMLElement {
       console.log(event)
     })
     this.addEventListener('mousemove', this.initStyles)
-  }
-
-  private initNodes (): HTMLElement {
-    const button = document.createElement('button')
-    button.setAttribute('type', 'button')
-    button.setAttribute('class', 'yui-button')
-
-    const text = this.getAttribute('data-text') as string
-    const span = document.createElement('span')
-    span.innerText = text
-    button.appendChild(span)
-
-    this.shadowRoot.appendChild(button)
-
-    return button
-  }
-
-  private initClass (): void {
-    const properties = [...this.getAttribute('class')?.split(' ') || []]
-
-    properties.filter(property => property.length > 0).forEach(property => {
-      this.shadowRoot.querySelector('.yui-button')?.classList.add(property)
-    })
   }
 
   private initStyles (event: MouseEvent): void {
@@ -60,9 +34,9 @@ class Button extends HTMLElement {
 
   private initTemplate(): string {
     return `
-    ${ this.getStyle() }
-      <button><span>${ this.getText() }</span></button>
-    `
+      ${ this.getStyle() }
+        <button><span>${ this.getText() }</span></button>
+      `
   }
 
   private getText (): string {
