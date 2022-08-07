@@ -1,25 +1,56 @@
+interface Nodes {
+  [key: string]: HTMLElement | null
+}
+
 class Button extends HTMLElement {
   public shadowRoot: ShadowRoot
+  public nodes: Nodes
   constructor () {
     super()
 
     this.shadowRoot = this.attachShadow({ mode: 'open' })
+    this.nodes = {}
 
     this.render()
+    this.initNodes()
   }
 
-  private init (): void {
-    this.initEvents()
+  // 감시할 Attributes 등록
+  static get observedAttributes () {
+    return ['data-text']
   }
 
-  private initEvents (): void {
-    this.addEventListener('click', (event) => {
-      console.log(event)
-    })
-    this.addEventListener('mousemove', this.initStyles)
+  private initNodes (): void {
+    this.nodes.button = this.shadowRoot.querySelector('button')
+    this.nodes.span = this.shadowRoot.querySelector('span')
   }
 
-  private initStyles (event: MouseEvent): void {
+  private connectedCallback (): void {
+    this.nodes.button?.addEventListener('click', this.handleClick.bind(this))
+    this.nodes.button?.addEventListener('mousemove', this.getStyles.bind(this))
+  }
+
+  private disconnectedCallback (): void {
+    this.nodes.button?.removeEventListener('click', this.handleClick)
+    this.nodes.button?.removeEventListener('mousemove', this.getStyles)
+  }
+
+  private adoptedCallback (): void {
+    console.log('컴포넌트 다른 페이지로 이동')
+  }
+
+  private attributeChangedCallback (name: string, oldValue: string, newValue: string): void {
+    if (this.nodes.span) {
+      this.nodes.span.innerText = newValue
+    }
+  }
+
+  private handleClick (): void {
+    const random = Math.floor(Math.random() * (50 - 200 + 1) + 200)
+    this.setAttribute('data-text', String(random))
+  }
+
+  private getStyles (event: MouseEvent): void {
     const x = event.pageX - this.offsetLeft
     const y = event.pageY - this.offsetTop
 
@@ -27,12 +58,11 @@ class Button extends HTMLElement {
     this.style.setProperty('--y', y + 'px')
   }
 
-
-  private render () {
-    this.shadowRoot.innerHTML = this.initTemplate()
+  private render (): void {
+    this.shadowRoot.innerHTML = this.getTemplate()
   }
 
-  private initTemplate(): string {
+  private getTemplate(): string {
     return `
       ${ this.getStyle() }
         <button><span>${ this.getText() }</span></button>
@@ -45,7 +75,7 @@ class Button extends HTMLElement {
     return text
   }
   
-  private getStyle () {
+  private getStyle (): string {
     return `
       <style>
         @import '/Users/hyeon-yujin/Documents/dev/yui/src/styles/buttons.scss';
