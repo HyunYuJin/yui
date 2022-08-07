@@ -1,1 +1,5 @@
-import './components/button/main'
+import './core/index'
+import './components/index'
+import './content/index'
+import './layout/index'
+import './utilities/index'

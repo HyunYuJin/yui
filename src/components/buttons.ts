@@ -1,15 +1,12 @@
 class Button extends HTMLElement {
-  public shadow: ShadowRoot
+  public shadowRoot: ShadowRoot
   constructor () {
     super()
 
-    this.shadow = this.attachShadow({ mode: 'open' })
-    const linkElem = document.createElement('link')
-    linkElem.setAttribute('rel', 'stylesheet')
-    linkElem.setAttribute('href', 'src/components/button/style.scss')
-    this.shadow.appendChild(linkElem)
+    this.shadowRoot = this.attachShadow({ mode: 'open' })
 
-    this.init()
+    // this.init()
+    this.render()
   }
 
   private init (): void {
@@ -35,7 +32,7 @@ class Button extends HTMLElement {
     span.innerText = text
     button.appendChild(span)
 
-    this.shadow.appendChild(button)
+    this.shadowRoot.appendChild(button)
 
     return button
   }
@@ -44,7 +41,7 @@ class Button extends HTMLElement {
     const properties = [...this.getAttribute('class')?.split(' ') || []]
 
     properties.filter(property => property.length > 0).forEach(property => {
-      this.shadow.querySelector('.yui-button')?.classList.add(property)
+      this.shadowRoot.querySelector('.yui-button')?.classList.add(property)
     })
   }
 
@@ -54,6 +51,32 @@ class Button extends HTMLElement {
 
     this.style.setProperty('--x', x + 'px') 
     this.style.setProperty('--y', y + 'px')
+  }
+
+
+  private render () {
+    this.shadowRoot.innerHTML = this.initTemplate()
+  }
+
+  private initTemplate(): string {
+    return `
+    ${ this.getStyle() }
+      <button><span>${ this.getText() }</span></button>
+    `
+  }
+
+  private getText (): string {
+    const text = this.getAttribute('data-text') as string
+
+    return text
+  }
+  
+  private getStyle () {
+    return `
+      <style>
+        @import '/Users/hyeon-yujin/Documents/dev/yui/src/styles/buttons.scss';
+      </style>
+    `
   }
 }
 

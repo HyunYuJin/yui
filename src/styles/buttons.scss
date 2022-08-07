@@ -17,7 +17,7 @@ $processing-text: #fff !default;
 $processing-outline-text: #c7c7c7 !default;
 $processing-light: #f8f8f8 !default;
 
-.yui-button {
+:host button {
   background-color: inherit;
   border-width: 1px;
   border-style: solid;
@@ -37,7 +37,7 @@ $processing-light: #f8f8f8 !default;
   transition: all 235ms ease-in-out 0s;
 }
 
-.primary {
+:host(.primary) button {
   background-color: $primary;
   color: $primary-text;
   border-width: 0px;
@@ -70,59 +70,59 @@ $processing-light: #f8f8f8 !default;
     background-color: $primary-light;
     transition: width 0.5s, height 0.5s;
   }
-  
-  &-outline {
-    background-color: $primary-light;
-    color: $primary-outline-text;
-    border-width: 1px;
-    border-color: $primary-outline-text;
+}
 
-    &:active {
-      background-color: $primary-light;
-    }
+:host(.primary-outline) button {
+  background-color: $primary-light;
+  color: $primary-outline-text;
+  border-width: 1px;
+  border-color: $primary-outline-text;
+
+  &:active {
+    background-color: $primary-light;
   }
 }
 
-.hover {
+:host(.hover) button {
   background-color: $hover;
   color: $hover-text;
   border-width: 0px;
   border-color: unset;
 
-  &-outline {
-    background-color: $hover-light;
-    color: $hover-outline-text;
-    border-width: 1px;
-    border-color: $hover-outline-text;
-
-    &:active {
-      background-color: $hover-light;
-    }
+  &:active {
+    
   }
+}
+
+:host(.hover-outline) button {
+  background-color: $hover-light;
+  color: $hover-outline-text;
+  border-width: 1px;
+  border-color: $hover-outline-text;
+
+  &:active {
+    background-color: $hover-light;
+  }
+}
+
+:host(.processing) button {
+  background-color: $processing;
+  color: $processing-text;
+  border-width: 0px;
+  border-color: unset;
 
   &:active {
     
   }
 }
 
-.processing {
-  background-color: $processing;
-  color: $processing-text;
-  border-width: 0px;
-  border-color: unset;
-
-  &-outline {
-    background-color: $processing-light;
-    color: $processing-outline-text;
-    border-width: 1px;
-    border-color: $processing-outline-text;
-
-    &:active {
-      background-color: $processing-light;
-    }
-  }
+:host(.processing-outline) button {
+  background-color: $processing-light;
+  color: $processing-outline-text;
+  border-width: 1px;
+  border-color: $processing-outline-text;
 
   &:active {
-    
+    background-color: $processing-light;
   }
 }
