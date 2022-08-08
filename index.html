@@ -13,11 +13,18 @@
       #yujinUI {
         width: 100%;
         height: 100vh;
+        padding: 0.5rem;
       }
     </style>
   </head>
   <body>
     <div id="yujinUI">
+      <br>
+      <h1>YUI</h1>
+      <br><hr><br><br>
+      <!-- Buttons -->
+      <h2>Buttons</h2>
+      <br>
       <yui-button disabled autofocus value="valuee">YUI Button</yui-button>
       <yui-button class="primary" onclick="eventClick(event)">Primary</yui-button>
       <yui-button class="primary-outline">Primary</yui-button>
@@ -25,6 +32,11 @@
       <yui-button class="hover-outline">Hover</yui-button>
       <yui-button class="processing">Processing</yui-button>
       <yui-button class="processing-outline">Processing</yui-button>
+      <br><br>
+      <h2>Alerts</h2>
+      <yui-alert></yui-alert>
+      <br>
+
     </div>
 
     <script type="module" src="/src/main.ts"></script>
