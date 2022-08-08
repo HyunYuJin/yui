@@ -18,19 +18,20 @@
   </head>
   <body>
     <div id="yujinUI">
-      <yui-button data-text="YUI Button" class="">dfsd</yui-button>
-      <yui-button data-text="Primary" class="primary" onclick="eventClick(event.detail)"></yui-button>
-      <yui-button data-text="Primary" class="primary-outline"></yui-button>
-      <yui-button data-text="hover" class="hover"></yui-button>
-      <yui-button data-text="hover" class="hover hover-outline"></yui-button>
-      <yui-button data-text="processing" class="processing"></yui-button>
-      <yui-button data-text="processing" class="processing-outline"></yui-button>
+      <yui-button disabled autofocus value="valuee">YUI Button</yui-button>
+      <yui-button class="primary" onclick="eventClick(event)">Primary</yui-button>
+      <yui-button class="primary-outline">Primary</yui-button>
+      <yui-button class="hover">Hover</yui-button>
+      <yui-button class="hover-outline">Hover</yui-button>
+      <yui-button class="processing">Processing</yui-button>
+      <yui-button class="processing-outline">Processing</yui-button>
     </div>
 
     <script type="module" src="/src/main.ts"></script>
     <script>
-      function eventClick (e) {
-        console.log('button event cliecked = ' + JSON.stringify(e))
+      function eventClick (event) {
+        const { detail } = event
+        console.log(event, detail)
       }
   </script>
   </body>

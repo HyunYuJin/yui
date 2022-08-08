@@ -28,6 +28,7 @@ class Button extends HTMLElement {
 
   private init (): void {
     this.initNodes()
+    this.initAttributes()
     this.initEvents()
   }
 
@@ -36,11 +37,24 @@ class Button extends HTMLElement {
     this.nodes.span = this.shadowRoot.querySelector('span')
   }
 
+  private initAttributes () {
+    if (this.hasAttribute('disabled')) {
+      this.nodes.button?.setAttribute('disabled', '')
+    }
+    if (this.hasAttribute('autofocus')) {
+      this.nodes.button?.setAttribute('autofocus', '')
+    }
+    if (this.hasAttribute('value')) {
+      const value = this.getAttribute('value') as string
+      this.nodes.button?.setAttribute('value', value)
+    }
+  }
+
   private initEvents (): void {
     this.events.click = new CustomEvent('click', {
       bubbles: true,
       detail: { 
-        text: this.getAttribute('data-text')
+        value: this.innerHTML
       }
     })
   }
@@ -66,9 +80,6 @@ class Button extends HTMLElement {
   }
 
   private handleClick (): void {
-    const random = Math.floor(Math.random() * (50 - 200 + 1) + 200)
-    this.setAttribute('data-text', String(random))
-
     this.dispatchEvent(this.events.click)
   }
 
@@ -84,12 +95,14 @@ class Button extends HTMLElement {
   }
 
   private getText (): string {
-    const text = this.getAttribute('data-text') as string
+    const text = this.innerHTML as string
 
     return text
   }
 
   private getEffects (event: MouseEvent): void {
+    if (this.hasAttribute('disabled')) return
+
     const x = event.pageX - this.offsetLeft
     const y = event.pageY - this.offsetTop
 

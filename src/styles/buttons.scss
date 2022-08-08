@@ -9,12 +9,16 @@ $primary-dark: #c52c48 !default;
 $primary-text: #fff !default;
 $primary-outline-text: hsl(349, 84%, 56%) !default;
 $hover: #d22344 !default;
+$hover-light: #ff7b93 !default;
+$hover-dark: #8a2638 !default;
 $hover-text: #fff !default;
-$hover-outline-text: #e293a0 !default;
+$hover-outline-text: #4d131d !default;
 $hover-light: #ffe0e6 !default;
 $processing: #9996A2 !default;
+$processing-light: #c1b5e6af !default;
+$processing-dark: #bcb1d4 !default;
 $processing-text: #fff !default;
-$processing-outline-text: #c7c7c7 !default;
+$processing-outline-text: #686868 !default;
 $processing-light: #f8f8f8 !default;
 
 :host button {
@@ -35,29 +39,12 @@ $processing-light: #f8f8f8 !default;
   padding: $padding-y $padding-x;
   border-radius: $btn-border-radius;
   transition: all 235ms ease-in-out 0s;
-}
-
-:host(.primary) button {
-  background-color: $primary;
-  color: $primary-text;
-  border-width: 0px;
-  border-color: unset;
 
   span {
     position: relative;
     z-index: 1;
   }
 
-  &:hover {
-    &::before {
-      width: 300px;
-      height: 300px;
-      background-color: $primary-light;
-    }
-  }
-  &:active {
-    background-color: $primary-dark;
-  }
   &::before {
     content: '';
     position: absolute;
@@ -67,8 +54,51 @@ $processing-light: #f8f8f8 !default;
     width: 0;
     height: 0;
     border-radius: 50%;
+    background-color: $main-default;
+    transition: width 0.5s, height 0.5s, background-color 0.25s;
+  }
+
+  &:disabled {
+    &:hover {
+      &::before {
+        width: 0;
+        height: 0;
+      }
+    }
+  }
+
+  &:hover {
+    &::before {
+      width: 300px;
+      height: 300px;
+      background-color: $main-default;
+    }
+    &:active {
+      &::before {
+        background-color: $main-background;
+      }
+    }
+  }
+}
+
+:host(.primary) button {
+  background-color: $primary;
+  color: $primary-text;
+  border-width: 0px;
+  border-color: unset;
+
+  &::before {
     background-color: $primary-light;
-    transition: width 0.5s, height 0.5s;
+  }
+  &:hover {
+    &::before {
+      background-color: $primary-light;
+    }
+    &:active {
+      &::before {
+        background-color: $primary-dark;
+      }
+    }
   }
 }
 
@@ -78,8 +108,18 @@ $processing-light: #f8f8f8 !default;
   border-width: 1px;
   border-color: $primary-outline-text;
 
-  &:active {
-    background-color: $primary-light;
+  &::before {
+    background-color: $primary-dark;
+  }
+  &:hover {
+    &::before {
+      background-color: $primary-dark;
+    }
+    &:active {
+      &::before {
+        background-color: $primary-light;
+      }
+    }
   }
 }
 
@@ -89,8 +129,18 @@ $processing-light: #f8f8f8 !default;
   border-width: 0px;
   border-color: unset;
 
-  &:active {
-    
+  &::before {
+    background-color: $hover-light;
+  }
+  &:hover {
+    &::before {
+      background-color: $hover-light;
+    }
+    &:active {
+      &::before {
+        background-color: $hover-dark;
+      }
+    }
   }
 }
 
@@ -100,8 +150,18 @@ $processing-light: #f8f8f8 !default;
   border-width: 1px;
   border-color: $hover-outline-text;
 
-  &:active {
-    background-color: $hover-light;
+  &::before {
+    background-color: $hover-dark;
+  }
+  &:hover {
+    &::before {
+      background-color: $hover-dark;
+    }
+    &:active {
+      &::before {
+        background-color: $hover-light;
+      }
+    }
   }
 }
 
@@ -111,8 +171,18 @@ $processing-light: #f8f8f8 !default;
   border-width: 0px;
   border-color: unset;
 
-  &:active {
-    
+  &::before {
+    background-color: $processing-light;
+  }
+  &:hover {
+    &::before {
+      background-color: $processing-light;
+    }
+    &:active {
+      &::before {
+        background-color: $processing-dark;
+      }
+    }
   }
 }
 
@@ -122,7 +192,17 @@ $processing-light: #f8f8f8 !default;
   border-width: 1px;
   border-color: $processing-outline-text;
 
-  &:active {
-    background-color: $processing-light;
+  &::before {
+    background-color: $processing-dark;
+  }
+  &:hover {
+    &::before {
+      background-color: $processing-dark;
+    }
+    &:active {
+      &::before {
+        background-color: $processing-light;
+      }
+    }
   }
 }
