@@ -1,10 +1,7 @@
-interface Nodes {
-  [key: string]: HTMLElement | null
-}
-
-interface Events {
-  [key: string]: CustomEvent
-}
+import type {
+  Nodes,
+  Events
+} from '../types'
 
 class Button extends HTMLElement {
   public shadowRoot: ShadowRoot
